@@ -1,12 +1,32 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <navegacion></navegacion>
+      <router-view @reinicioTodo="reiniciarOpiniones"/>
+     <footer-app></footer-app>
   </div>
 </template>
+
+<script>
+import Navegacion from './components/Navegacion.vue';
+import FooterApp from './components/FooterApp.vue';
+import {conexApi} from "./config/conexionApi";
+
+export default {
+  name: 'App',
+   components: {
+     Navegacion,
+     FooterApp
+   },
+   mounted() {
+    conexApi();
+   },
+   methods: {
+     reiniciarOpiniones(){
+       this.$store.state.listaOpiniones = [];
+     }
+   },
+}
+</script>
 
 <style lang="scss">
 #app {
