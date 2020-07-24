@@ -1,6 +1,9 @@
 <template>
   <div class="container">
-    <div class="row">
+    <!-- <div class="mt-5 pt-5 input-group mb-3">
+      <input type="text" class="form-control" v-model="busqueda" placeholder="Escribe el personaje que deseas buscar...">
+    </div> -->
+    <div class="row my-5 py-5">
       <div
         class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 my-4"
         v-for="(item, index) in datosApi"
@@ -103,7 +106,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-              <button type="button" class="btn btn-primary" data-dismiss="modal" @click.prevent="agregandoFav(item)">Agregar a Favoritos</button>
+              <button type="button" class="btn btn-primary" data-dismiss="modal" @click.prevent="agregandoFav(item)" >Agregar a Favoritos</button>
             </div>
           </div>
         </div>
@@ -124,7 +127,9 @@ export default {
   },
   computed: {
     datosApi() {
-      return this.$store.getters.enviarInfoApi;
+      return this.$store.getters.enviarInfoApi.filter(datos =>{
+        return datos.name.toLowerCase().includes(this.$store.state.busqueda.toLowerCase())
+      });
     }
   },
   methods: {

@@ -26,6 +26,11 @@ Vue.use(VueRouter)
     component: () => import('../views/Opiniones.vue')
   },
   {
+    path: '/editar/:index',
+    name: 'Editar',
+    component: () => import('../views/Editar.vue')
+  },
+  {
     path: '*',
     name: 'Error404',
     component: () => import('../views/Error404.vue')

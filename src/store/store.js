@@ -8,6 +8,7 @@ export default new Vuex.Store({
     infoList: [],
     listaOpiniones: [],
     listaFavorito: [],
+    busqueda: '',
   },
   getters: {
     enviarInfoApi(state){
@@ -32,6 +33,15 @@ export default new Vuex.Store({
     },
     eliminarFavMutacion(state,index){
       state.listaFavorito.splice(index,1);
+    },
+    eliminarOpinionMutations(state,indexRecibido){
+      console.time("Duracion");
+      state.listaOpiniones.splice(indexRecibido,1);
+      console.timeEnd("Duracion");
+    },
+    cambiandoOpinionMutations(state,datosRecibidos){
+      state.listaOpiniones[datosRecibidos.index].nombre = datosRecibidos.nombre;
+      state.listaOpiniones[datosRecibidos.index].opinion = datosRecibidos.opinion;
     }
   },
   actions: {
@@ -46,6 +56,12 @@ export default new Vuex.Store({
     },
     eliminandoFavorito(context,elimiFavRecibido){
       context.commit('eliminarFavMutacion',elimiFavRecibido);
+    },
+    eliminarOpinionAction(context,indexRecibido){
+      context.commit('eliminarOpinionMutations',indexRecibido);
+    },
+    cambiandoOpinionAction(context,datosRecibidos){
+      context.commit('cambiandoOpinionMutations',datosRecibidos);
     }
   },
 })

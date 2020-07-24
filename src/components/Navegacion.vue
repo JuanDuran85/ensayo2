@@ -17,7 +17,11 @@
                  <router-link class="nav-link" to="/administracion">Administración</router-link>
                </li>
           </ul>
-  </div>
+          <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Escribe el personaje que deseas buscar..." aria-label="Search" v-model="busqueda">
+<!--             <button class="btn btn-outline-success my-2 my-sm-0" type="submit" @click.prevent="enviarBusqueda">Search</button> -->
+        </form>
+        </div>
 </nav>
     </div>
 </template>
@@ -26,6 +30,21 @@
   
 export default {
     name: 'Navegacion',
+    data() {
+      return {
+        busqueda: ''
+      }
+    },
+    watch: {
+      busqueda(){
+        this.$store.state.busqueda = this.busqueda;
+      }
+    },
+   /*  methods: {
+      enviarBusqueda(){
+        this.$store.state.busqueda = this.busqueda;
+      }
+    }, */
 }
 </script>
 
